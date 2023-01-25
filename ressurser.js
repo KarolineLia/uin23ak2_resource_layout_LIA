@@ -95,6 +95,8 @@ const resources = [
     },
 ]
 
+
+//Her har jeg brukt https://www.w3schools.com/howto/howto_js_tabs.asp for å lage funksjonen
 function openTab(evt, category) {
     var i = 0;
 
@@ -111,3 +113,25 @@ function openTab(evt, category) {
     document.getElementById(category).style.display = "block";
     evt.currentTarget.className += " active"
 }
+
+//Står ikke noe om den skal være åpen eller lukket, så tar bare at HTML kategorien er åpen som en default for utseendets skyld
+//Hentet fra https://www.w3schools.com/howto/howto_js_tabs.asp
+document.getElementById("openStart").click();
+
+//Gå gjennom arrayen for å få lagt inn riktig kategori, tittel, url osv.:
+let tabcontent = document.getElementsByClassName("tabcontent")
+let tabHTML = ""
+//Første nivå:
+resources.map(kategori => {
+    tabHTML += `<h2>${kategori.category}</h2>
+    <p>${kategori.text}</p>`
+    //Gå gjennom på andre nivå:
+    kategori.sources.map(links => {
+        tabHTML += `<ul>
+        <li><a href="${links.url}">${links.title}</a></li>
+    </ul>`
+    })
+    return
+})
+
+tabcontent.innerHTML = tabHTML
