@@ -112,6 +112,8 @@ tablinks.forEach((button, index) => {
         //Gir knappene et attribute for å koble sammen div id i html med knappene som skal
         //åpne hver enkelt meny fane.
 
+        //Prøvde å bruke en vanlig onclick funksjon, og å .map() arrayen, men oppsettet jeg holdt på med funka dårlig
+
         tablinks.forEach(tabButton => tabButton.classList.remove('active'))
         button.classList.add('active')
         //https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/forEach
@@ -129,6 +131,9 @@ tablinks.forEach((button, index) => {
                     ${resources[index].sources.map(links => `
                     <li><a href="${links.url}">${links.title}</a></li>`).join('')}
                 </ul>`
+                //Så på en av løsningene til innføring til programmerings eksamen "The website menu" for hvordan man går gjennom en array på flere nivåer
+                //Bruker .join('') for å fjerne kommaene som kom mellom linkene:
+                //https://stackoverflow.com/questions/12835621/removing-commas-from-javascript-array
             } else {
                 //Hvis element id ikke er lik tabIndex så skal klassen active bli fjernet. 
                 info.classList.remove('active')
