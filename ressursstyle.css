@@ -50,7 +50,6 @@ header h1 {
 }
 
 .tabcontent {
-    display: block;
     border: 1.5px solid #B7B7B7;
     border-top: 5px solid #25DFE6;
     padding: 1rem 2rem;
