@@ -96,42 +96,34 @@ const resources = [
 ]
 
 
-//Her har jeg brukt https://www.w3schools.com/howto/howto_js_tabs.asp for å lage funksjonen
-function openTab(evt, category) {
-    var i = 0;
+/*Her har jeg brukt:
+https://www.w3schools.com/howto/howto_js_tabs.asp
+https://www.w3schools.com/jsref/met_document_getelementsbyclassname.asp
+https://stackoverflow.com/questions/3871547/iterating-over-result-of-getelementsbyclassname-using-array-foreach*/
+const tabcontent = document.querySelectorAll('.tabcontent');
+const tablinks = document.querySelectorAll('.tablinks');
 
-    const tabcontent = document.getElementsByClassName("tabcontent")
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none"
-    }
+tablinks.forEach((button, index) => {
+    button.addEventListener('click', () => {
+        const tabIndex = button.getAttribute('cat-index');
 
-    const tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
+        tablinks.forEach(btn => btn.classList.remove('active'))
+        button.classList.add('active')
 
-    document.getElementById(category).style.display = "block";
-    evt.currentTarget.className += " active"
-}
-
-//Står ikke noe om den skal være åpen eller lukket, så tar bare at HTML kategorien er åpen som en default for utseendets skyld
-//Hentet fra https://www.w3schools.com/howto/howto_js_tabs.asp
-document.getElementById("openStart").click();
-
-//Gå gjennom arrayen for å få lagt inn riktig kategori, tittel, url osv.:
-let tabcontent = document.getElementsByClassName("tabcontent")
-let tabHTML = ""
-//Første nivå:
-resources.map(kategori => {
-    tabHTML += `<h2>${kategori.category}</h2>
-    <p>${kategori.text}</p>`
-    //Gå gjennom på andre nivå:
-    kategori.sources.map(links => {
-        tabHTML += `<ul>
-        <li><a href="${links.url}">${links.title}</a></li>
-    </ul>`
+        tabcontent.forEach(content => {
+            if(content.id === tabIndex) {
+                content.classList.add('active');
+                content.innerHTML = `
+                <h2>${resources[index].category}</h2>
+                <p>${resources[index].text}</p>
+                <ul>
+                    ${resources[index].sources.map(links => `
+                    <li><a href="${links.url}">${links.title}</a></li>`).join('')}
+                </ul>`
+            } else {
+                content.classList.remove('active')
+            }
+        })
     })
-    return
-})
-
-tabcontent.innerHTML = tabHTML
+}
+);
