@@ -98,22 +98,26 @@ const resources = [
 
 /*Her har jeg brukt:
 https://www.w3schools.com/howto/howto_js_tabs.asp
-https://www.w3schools.com/jsref/met_document_getelementsbyclassname.asp
-https://stackoverflow.com/questions/3871547/iterating-over-result-of-getelementsbyclassname-using-array-foreach*/
+https://www.w3schools.com/JSREF/met_document_queryselectorall.asp
+
+Fikk også hjelp av Joachim Bjerkland for oppsettet mtp .map() i forEach()*/
 const tabcontent = document.querySelectorAll('.tabcontent');
 const tablinks = document.querySelectorAll('.tablinks');
 
 tablinks.forEach((button, index) => {
+    //Her så jeg på hvordan vi brukte index i lego webshop shopscript.js
     button.addEventListener('click', () => {
         const tabIndex = button.getAttribute('cat-index');
+        //https://www.w3schools.com/jsref/met_element_addeventlistener.asp
 
         tablinks.forEach(btn => btn.classList.remove('active'))
         button.classList.add('active')
+        //https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/forEach
 
-        tabcontent.forEach(content => {
-            if(content.id === tabIndex) {
-                content.classList.add('active');
-                content.innerHTML = `
+        tabcontent.forEach(info => {
+            if(info.id === tabIndex) {
+                info.classList.add('active');
+                info.innerHTML = `
                 <h2>${resources[index].category}</h2>
                 <p>${resources[index].text}</p>
                 <ul>
@@ -121,9 +125,13 @@ tablinks.forEach((button, index) => {
                     <li><a href="${links.url}">${links.title}</a></li>`).join('')}
                 </ul>`
             } else {
-                content.classList.remove('active')
+                info.classList.remove('active')
             }
         })
     })
 }
 );
+
+/*https://stackoverflow.com/questions/3871547/iterating-over-result-of-getelementsbyclassname-using-array-foreach
+https://www.geeksforgeeks.org/iterate-map-java/
+https://www.baeldung.com/java-iterate-map*/
