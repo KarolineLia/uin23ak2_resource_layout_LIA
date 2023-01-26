@@ -109,12 +109,17 @@ tablinks.forEach((button, index) => {
     button.addEventListener('click', () => {
         const tabIndex = button.getAttribute('cat-index');
         //https://www.w3schools.com/jsref/met_element_addeventlistener.asp
+        //Gir knappene et attribute for å koble sammen div id i html med knappene som skal
+        //åpne hver enkelt meny fane.
 
-        tablinks.forEach(btn => btn.classList.remove('active'))
+        tablinks.forEach(tabButton => tabButton.classList.remove('active'))
         button.classList.add('active')
         //https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/forEach
 
         tabcontent.forEach(info => {
+            //If/else for å si at hvis id til element i tabcontent er likt tabIndex (som er attributtet til knappene)
+            //så skal disse elementene i tabcontent få klassen active, og at når den er aktiv skal html strukturen bli
+            //konstruert.
             if(info.id === tabIndex) {
                 info.classList.add('active');
                 info.innerHTML = `
@@ -125,6 +130,7 @@ tablinks.forEach((button, index) => {
                     <li><a href="${links.url}">${links.title}</a></li>`).join('')}
                 </ul>`
             } else {
+                //Hvis element id ikke er lik tabIndex så skal klassen active bli fjernet. 
                 info.classList.remove('active')
             }
         })
