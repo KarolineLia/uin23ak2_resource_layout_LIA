@@ -113,11 +113,7 @@ tablinks.forEach((button, index) => {
         //åpne hver enkelt meny fane.
 
         //Prøvde å bruke en vanlig onclick funksjon, og å .map() arrayen, men oppsettet jeg holdt på med funka dårlig
-
-        tablinks.forEach(tabButton => tabButton.classList.remove('active'))
-        button.classList.add('active')
         //https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/forEach
-
         tabcontent.forEach(info => {
             //If/else for å si at hvis id til element i tabcontent er likt tabIndex (som er attributtet til knappene)
             //så skal disse elementene i tabcontent få klassen active, og at når den er aktiv skal html strukturen bli
@@ -139,6 +135,11 @@ tablinks.forEach((button, index) => {
                 info.classList.remove('active')
             }
         })
+
+        //Fjernet det active elementet til knappene, for så å spesifisere at button elementet som jeg definerer i starten av forEach()
+        //Skal ha klassen active som en standard
+        tablinks.forEach(tabButton => tabButton.classList.remove('active'))
+        button.classList.add('active')
     })
 }
 );
