@@ -142,7 +142,11 @@ tablinks.forEach((button, index) => {
     })
 }
 );
-
 /*https://stackoverflow.com/questions/3871547/iterating-over-result-of-getelementsbyclassname-using-array-foreach
 https://www.geeksforgeeks.org/iterate-map-java/
 https://www.baeldung.com/java-iterate-map*/
+
+
+document.getElementById("openStart").click();
+//Siden det ikke var spesifisert så valgte jeg, av estetiske grunner, å la en tab være åpen som en defaul.
+//Brukte https://www.w3schools.com/howto/howto_js_tabs.asp
